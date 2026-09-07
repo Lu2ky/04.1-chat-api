@@ -9,6 +9,7 @@ RUN CGO_ENABLED=0 go build -o api .
 FROM alpine:3.24
 COPY --from=builder /api/api .
 RUN chmod +x api
+RUN touch .env
 EXPOSE 8080
 CMD ["./api"]
 
