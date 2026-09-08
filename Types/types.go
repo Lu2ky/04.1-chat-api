@@ -2,6 +2,7 @@ package Types
 
 type User struct {
 	ID       string    `json:"idUser"`
+	Name string `json:"name"`
 }
 type Message struct {
 	ID        int    `json:"idMessage"`

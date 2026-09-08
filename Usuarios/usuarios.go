@@ -42,7 +42,7 @@ func CreateUser(context *gin.Context){
 		context.JSON(400, gin.H{"error": "Error al parsear el JSON"})
 		return
 	}
-	_, err := Database.Connection.Exec("INSERT INTO Usuario (idUsuario) VALUES (?)", user.ID)
+	_, err := Database.Connection.Exec("INSERT INTO Usuario (idUsuario, nombre) VALUES (?,?)", user.ID,user.Name)
 	if err != nil {
 		context.JSON(500, gin.H{"error": "Error al crear el usuario"})
 		return
