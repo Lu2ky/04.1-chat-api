@@ -1,6 +1,7 @@
 package Usuarios
 
 import (
+	"database/sql"
 	"log"
 
 	Database "04.1-chat-api/Database"
@@ -49,3 +50,19 @@ func CreateUser(context *gin.Context){
 	}
 	context.JSON(200, gin.H{"message": "Usuario creado exitosamente"})
 }	
+func GetUser(context *gin.Context){
+	idUser := context.Param("id")
+	var user Types.User;
+	query := `SELECT u.idUsuario, u.nombre FROM Usuario u WHERE u.idUsuario = ?`
+	row := Database.Connection.QueryRow(query,idUser);
+	err := row.Scan(&user.ID,&user.Name)
+	if err != nil{
+		if err == sql.ErrNoRows{
+			context.JSON(400, gin.H{"Error":"usuario no encontrado"})
+			return;
+		}
+		context.JSON(500, gin.H{"error": "internal server error"})
+		return
+	}
+	context.JSON(200,user)
+}

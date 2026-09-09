@@ -27,11 +27,7 @@ func main(){
 	}()
 
 	router := gin.Default()
-	router.Use(cors.New(cors.Config{
-		AllowAllOrigins: true,
-		AllowMethods:    []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
-		AllowHeaders:    []string{"Origin", "Content-Type", "Authorization"},
-	}))
+	router.Use(cors.Default())
 	v0 := router.Group("/api/")
 	registerRoutes(v0)
 	router.Run("0.0.0.0:8080")
@@ -43,4 +39,5 @@ func registerRoutes(router gin.IRouter){
 	router.GET("/chats/:idChat", Chats.GetMessagesChats)
 	router.POST("/chats/create", Chats.CreateChat)
 	router.POST("/messages/create", Messages.CreateMessage)
+	router.GET("/usuarios/:id", Usuarios.GetUser)
 }
