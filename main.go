@@ -7,6 +7,7 @@ import (
 	"04.1-chat-api/Database"
 	"04.1-chat-api/Messages"
 	"04.1-chat-api/Usuarios"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -26,6 +27,11 @@ func main(){
 	}()
 
 	router := gin.Default()
+	router.Use(cors.New(cors.Config{
+		AllowAllOrigins: true,
+		AllowMethods:    []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
+		AllowHeaders:    []string{"Origin", "Content-Type", "Authorization"},
+	}))
 	v0 := router.Group("/api/")
 	registerRoutes(v0)
 	router.Run("0.0.0.0:8080")
