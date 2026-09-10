@@ -11,7 +11,7 @@ import (
 
 func GetUserChats(context *gin.Context){
 	idUser := context.Param("idUser");
-	query := `SELECT cu.idchats_usuario, cu.Usuario_idUsuario, cu.Chat_idChat FROM chats_usuario cu INNER JOIN Usuario u ON cu.Usuario_idUsuario = u.idUsuario INNER JOIN Chat c ON c.idChat = cu.Chat_idChat WHERE cu.Usuario_idUsuario = ?`
+	query := `SELECT cu.idchats_usuario, cu.Usuario_idUsuario, cu.Chat_idChat, c.nombre FROM chats_usuario cu INNER JOIN Usuario u ON cu.Usuario_idUsuario = u.idUsuario INNER JOIN Chat c ON c.idChat = cu.Chat_idChat WHERE cu.Usuario_idUsuario = ?`
 	rows, err := Database.Connection.Query(query, idUser)
 	if err != nil {
 		log.Println("Error al obtener los chats del usuario:", err)
