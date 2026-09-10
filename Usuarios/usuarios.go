@@ -22,7 +22,7 @@ func GetUserChats(context *gin.Context){
 	var chats []Types.UserChat
 	for rows.Next() {
 		var chat Types.UserChat
-		if err := rows.Scan(&chat.ID, &chat.Usuario_idUsuario, &chat.Chat_idChat); err != nil {
+		if err := rows.Scan(&chat.ID, &chat.Usuario_idUsuario, &chat.Chat_idChat, &chat.Nombre); err != nil {
 			log.Println("Error escaneando fila de chats_usuarios:", err)
 			context.JSON(500, gin.H{"error": "Error al escanear los chats del usuario"})
 			return

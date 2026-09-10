@@ -19,6 +19,7 @@ type UserChat struct {
 	Chat_idChat int    `json:"chatId"`
 	Usuario_idUsuario string `json:"idUser"`
 	ID int `json:"id"`
+	Nombre string `json:"name"`
 }
 
 type CreateChat struct{
